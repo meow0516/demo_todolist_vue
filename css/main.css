@@ -54,7 +54,12 @@ ul {
 }
 
 .icon_add, .content {
+  margin: 0 5px;
   padding: 5px;
+}
+
+.icon_add {
+  cursor: pointer;
 }
 
 .content {
