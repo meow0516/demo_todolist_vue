@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/fontello.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <title>Todo List</title>
+</head>
+<body>
+    <div id="todolist">
+        <div class="header">
+            <div class="title">My Todo-s</div>
+            <div class="add-bar">
+                <input type="text" placeholder="Add new" class="addtodo">
+                <button class="add">Add</button>
+            </div>
+        </div>
+        <hr />
+        <div class="todos">
+            <ul>
+                <li>
+                    <div class="d-flex todo_item">
+                        <div class="icon_add icon-check-empty"></div>
+                        <div class="content" contenteditable="false">todo1</div>
+                        <div class="icon_add icon-pencil"></div>
+                        <div class="icon_add icon-trash-empty"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="d-flex">
+                        <i class="icon-check"></i>
+                        <div class="content">todo2</div>
+                        <i class="icon-pencil"></i>
+                        <i class="icon-trash-empty"></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="d-flex">
+                        <i class="icon-check-empty"></i>
+                        <div class="content">todo3</div>
+                        <i class="icon-pencil"></i>
+                        <i class="icon-trash-empty"></i>
+                    </div>
+                </li>
+            </ul>
+
+        </div>    
+    </div>
+    
+</body>
+
+<script src="js/jquery-3.6.0.min.js"></script>
+<script src="js/main.js"></script>
+</html>
