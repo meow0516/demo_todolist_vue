@@ -46,6 +46,10 @@
   margin: 0 auto;
 }
 
+.todo_item:hover {
+  background-color: #7ab8f7;
+}
+
 ul {
   margin: 0;
   padding: 0;
@@ -66,5 +70,9 @@ ul {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
+}
+
+.none {
+  display: none;
 }
 /*# sourceMappingURL=main.css.map */
