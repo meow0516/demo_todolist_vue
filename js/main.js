@@ -1,20 +1,30 @@
 $(document).ready(function() {
 
     $('.add').click(function create_todo() {
-        // new_todo = $('li').first().clone();
-        // console.log(new_todo);
-        $('ul').append('123');
+        new_todo = $('.addtodo').val();
+        new_todo_format = $('.none').clone().removeClass('none');
+        new_todo_format.find('.content').text(new_todo);
+        $('ul').append(new_todo_format);
+        $('input.addtodo').val('');
     });
 
-    $('.icon-pencil').click(function edit_todo() {
+    $('.todos').on('click','.edit', function edit_todo() {
         // change editable
-        $(this).siblings('.content').attr('contenteditable','true').focus();
-
-        // after edit, blur and editable=false
-
+        if($(this).siblings('.content').attr("contentEditable") == "false"){
+            $(this).removeClass('icon-pencil').addClass('icon-floppy');
+            $(this).siblings('.content').attr('contenteditable','true').focus();
+            
+        }
+        // after edit editable=false
+        else{
+            $(this).removeClass('icon-floppy').addClass('icon-pencil');
+            $(this).siblings('.content').attr('contenteditable','false');
+        }
+        // blur, editable = false
+        
     });
 
-    $('.complete').click( function complete_todo() {
+    $('.todos').on('click','.complete', function complete_todo() {
         if ($(this).hasClass('icon-check-empty')) 
         {
             $(this).removeClass('icon-check-empty').addClass('icon-check');
