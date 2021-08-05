@@ -1,4 +1,12 @@
 $(document).ready(function() {
+    
+    // function blur_todo() {
+    //     console.log('blur');
+    //     // $(this).text(current_content);
+    //     // $(this).siblings('.edit').removeClass('icon-floppy').addClass('icon-pencil');
+    //     // $(this).attr('contenteditable','false');
+    // }
+    let current_content = '';
 
     $('.add').click(function create_todo() {
         new_todo = $('.addtodo').val();
@@ -7,22 +15,39 @@ $(document).ready(function() {
         $('ul').append(new_todo_format);
         $('input.addtodo').val('');
     });
-
-    $('.todos').on('click','.edit', function edit_todo() {
-        // change editable
-        if($(this).siblings('.content').attr("contentEditable") == "false"){
-            $(this).removeClass('icon-pencil').addClass('icon-floppy');
-            $(this).siblings('.content').attr('contenteditable','true').focus();
-            
-        }
-        // after edit editable=false
-        else{
-            $(this).removeClass('icon-floppy').addClass('icon-pencil');
-            $(this).siblings('.content').attr('contenteditable','false');
-        }
-        // blur, editable = false
+    
+    // $('li').each(function(){
+        //     console.log($(this).find('.content').text());
+        // });        
         
+        
+    $('.todos').on('click','.icon-pencil', function edit_todo() {
+        if($(this).siblings().hasClass('icon-check-empty')){
+            current_content = $(this).siblings('.content').text();       
+            $(this).removeClass('icon-pencil save').addClass('icon-floppy');
+            $(this).siblings('.content').attr('contenteditable','true').focus();
+        }
     });
+    
+    $('.todos').on('click','.icon-floppy', function save_todo() {
+        $(this).removeClass('icon-floppy save').addClass('icon-pencil');
+        $(this).siblings('.content').attr('contenteditable','false');
+    });
+    
+    $('.todos').on('mousedown','.icon-floppy', function() {
+        $(this).addClass('save');
+    });
+
+
+    $('.todos').on('focusout','.content',function blur_todo (e) { 
+        //     // if save->edit_todo
+        
+            if(!$(this).siblings().hasClass('save')){       
+            $(this).text(current_content);
+            $(this).siblings('.edit').removeClass('icon-floppy').addClass('icon-pencil');
+            $(this).attr('contenteditable','false');
+            }   
+        });
 
     $('.todos').on('click','.complete', function complete_todo() {
         if ($(this).hasClass('icon-check-empty')) 
@@ -41,26 +66,3 @@ $(document).ready(function() {
 
 
 });
-
-
-
-
-
-// function todo_create() {          
-//     $('li').last().append('123');   
-// };
-
-// function todo_complete() {
-//     $(this).removeClass('icon-check').addClass('icon-check-empty');
-//     console.log('complete');
-// }
-
-// function todo_edit(e) {
-//     $(".content").attr("contenteditable","true");
-//     // console.log('123');
-// }
-
-// function todo_delete() {
-    
-//     console.log('delete');
-// }
