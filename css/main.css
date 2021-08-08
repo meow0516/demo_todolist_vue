@@ -1,6 +1,7 @@
 #todolist {
   padding: 50px 0;
   width: 80%;
+  height: 100vh;
   margin: 0 auto;
   background-color: #b8d1ee;
 }
