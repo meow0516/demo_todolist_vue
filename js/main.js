@@ -1,9 +1,11 @@
+let current_content = '';
+let content_arr = [];
+// let response = null;
+let taskId = null;
+let completeStatus = null;
+
 $(document).ready(function() {
     
-    
-    let current_content = '';
-    let content_arr = [];
-
     
     $('li:not(.none)').each(function(){
             li_content = $(this).find('.content').text();
@@ -13,14 +15,17 @@ $(document).ready(function() {
     
 
     $('.add').click(function create_todo() {
+        // add new todo
         new_todo = $('.addtodo').val();
         new_todo_format = $('.none').clone().removeClass('none');
         new_todo_format.find('.content').text(new_todo);
+        // save to databse
+        addTask(new_todo);
+
         $('li.none').before(new_todo_format);
         $('input.addtodo').val('');
-        content_arr.push({description:new_todo});
-        console.log(content_arr);
-        addTask(new_todo);
+
+        // console.log(content_arr);
     });
     
         

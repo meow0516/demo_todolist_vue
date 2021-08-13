@@ -11,11 +11,13 @@ var logininfo = {
     }),
   };
 
-  let token = null;
+let token = null;
+
+
 
 $.ajax(logininfo).done(function (response) {
       token = response.token;
-      // console.log(response);
+      console.log(response);
       // console.log(token);
 });
             
@@ -50,14 +52,19 @@ function addTask(description){
       "Content-Type": "application/json"
     },
     "data": JSON.stringify({
-      "completed": "true",
       "description": description,
-      // "description": new_todo
     }),
   };
 
   $.ajax(addTaskSettings).done(function (response) {
     console.log(response);
+    taskId = response.data['_id'];
+    completeStatus = response.data['completed'];
+    content_arr.push({
+      id: taskId,
+      completed: completeStatus,
+      description: description
+    });
   });
   
 }
