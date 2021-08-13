@@ -66,6 +66,9 @@ $(document).ready(function() {
         if ($(this).hasClass('icon-check-empty')) 
         {
             $(this).removeClass('icon-check-empty').addClass('icon-check');
+            let li_index = $(this).closest('li').index();
+            let id = content_arr[li_index]['id'];
+            updateTask(id);
         }
         else{
             $(this).removeClass('icon-check').addClass('icon-check-empty');

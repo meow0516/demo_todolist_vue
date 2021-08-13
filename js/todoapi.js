@@ -66,13 +66,12 @@ function addTask(description){
       description: description
     });
   });
-  
 }
 
 // update task
-function updateTask(){
+function updateTask(id){
   var updateSettings = {
-      "url": "https://api-nodejs-todolist.herokuapp.com/task/5ddcd1566b55da0017597239",
+      "url": "https://api-nodejs-todolist.herokuapp.com/task/"+id,
       "method": "PUT",
       "timeout": 0,
       "headers": {
@@ -81,7 +80,8 @@ function updateTask(){
           "Content-Type": "application/json"
         },
         "data": JSON.stringify({
-            "completed": true
+            "completed": true,
+            // "description":
           }),
         };
         
