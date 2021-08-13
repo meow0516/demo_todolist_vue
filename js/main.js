@@ -18,8 +18,9 @@ $(document).ready(function() {
         new_todo_format.find('.content').text(new_todo);
         $('li.none').before(new_todo_format);
         $('input.addtodo').val('');
-        content_arr.push(new_todo);
+        content_arr.push({description:new_todo});
         console.log(content_arr);
+        addTask(new_todo);
     });
     
         
