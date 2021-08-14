@@ -78,9 +78,16 @@ $(document).ready(function() {
 
     $('.todos').on('click' , '.delete' , function delete_todo() {
         let li_index = $(this).closest('li').index();
+        let id = content_arr[li_index]['id'];
+
+        // delete task from database
+        deleteTask(id);
+        
+        // delet on html
         content_arr.splice(li_index,1);
         $(this).closest('li').remove();
-        console.log(content_arr);
+        // console.log(content_arr);        
+
     });
 
 

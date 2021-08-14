@@ -92,9 +92,9 @@ function updateTask(id){
 }
         
 // delete task
-function deleteTask(){
+function deleteTask(id){
   var deleteSettings = {
-    "url": "https://api-nodejs-todolist.herokuapp.com/task/6113c8c825480900177c4ecb",
+    "url": "https://api-nodejs-todolist.herokuapp.com/task/"+id,
     "method": "DELETE",
     "timeout": 0,
     "headers": {
@@ -103,7 +103,7 @@ function deleteTask(){
       "Content-Type": "application/json",
     },
   };
-  
+
   $.ajax(deleteSettings).done(function (response) {
     console.log(response);
   });
