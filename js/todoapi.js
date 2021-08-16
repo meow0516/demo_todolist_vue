@@ -1,3 +1,5 @@
+let token = null;
+
 var logininfo = {
     "url": "https://api-nodejs-todolist.herokuapp.com/user/login",
     "method": "POST",
@@ -11,7 +13,6 @@ var logininfo = {
     }),
   };
 
-let token = null;
 
 
 
@@ -19,6 +20,8 @@ $.ajax(logininfo).done(function (response) {
       token = response.token;
       console.log(response);
       // console.log(token);
+      getAllTasks();
+
 });
             
 // get all task
@@ -35,7 +38,27 @@ function getAllTasks(){
   };
   
   $.ajax(getTaskSettings).done(function (response) {
-    console.log(response);
+    // console.log(response);
+    taskArray = response.data
+    // console.log(taskArray);
+    taskArray.forEach(taskList => {
+
+      completeStatus = taskList['completed'];
+      taskId = taskList['_id'];
+      description = taskList['description'];
+      // console.log(completed+id+description);
+
+      new_todo_format = $('.none').clone().removeClass('none');
+      new_todo_format.find('.content').text(description);
+
+      content_arr.push({
+      id: taskId,
+      completed: completeStatus,
+      description: description
+      });
+
+      $('li.none').before(new_todo_format);
+    });
   });
   
 }

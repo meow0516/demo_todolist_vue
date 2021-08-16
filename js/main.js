@@ -1,16 +1,18 @@
 let current_content = '';
 let content_arr = [];
+let taskArray = [];
 // let response = null;
 let taskId = null;
 let completeStatus = null;
 
 $(document).ready(function() {
+
     
     
-    $('li:not(.none)').each(function(){
-            li_content = $(this).find('.content').text();
-            content_arr.push(li_content);
-        }); 
+    // $('li:not(.none)').each(function(){
+    //         li_content = $(this).find('.content').text();
+    //         content_arr.push(li_content);
+    //     }); 
     
     
 
@@ -19,6 +21,7 @@ $(document).ready(function() {
         new_todo = $('.addtodo').val();
         new_todo_format = $('.none').clone().removeClass('none');
         new_todo_format.find('.content').text(new_todo);
+        
         // save to databse
         addTask(new_todo);
 
