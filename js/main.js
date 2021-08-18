@@ -66,15 +66,19 @@ $(document).ready(function() {
     });
 
     $('.todos').on('click','.complete', function complete_todo() {
+        let li_index = $(this).closest('li').index();
+        let id = content_arr[li_index]['id'];
+
         if ($(this).hasClass('icon-check-empty')) 
         {
             $(this).removeClass('icon-check-empty').addClass('icon-check');
-            let li_index = $(this).closest('li').index();
-            let id = content_arr[li_index]['id'];
+            content_arr[li_index]['completed'] = true;
+
             updateTask(id);
         }
         else{
             $(this).removeClass('icon-check').addClass('icon-check-empty');
+            content_arr[li_index]['completed'] = false;
         }
     });
     
