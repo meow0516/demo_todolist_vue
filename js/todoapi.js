@@ -13,9 +13,6 @@ var logininfo = {
     }),
   };
 
-
-
-
 $.ajax(logininfo).done(function (response) {
       token = response.token;
       console.log(response);
@@ -46,7 +43,6 @@ function getAllTasks(){
       completeStatus = taskList['completed'];
       taskId = taskList['_id'];
       description = taskList['description'];
-      // console.log(completed+id+description);
 
       new_todo_format = $('.none').clone().removeClass('none');
       new_todo_format.find('.content').text(description);
@@ -57,8 +53,16 @@ function getAllTasks(){
       description: description
       });
 
-      $('li.none').before(new_todo_format);
-    });
+      if ( completeStatus == false) {
+        $('li.none').before(new_todo_format);
+      }
+      else{        
+          new_todo_format.find('.complete').removeClass('icon-check-empty').addClass('icon-check');
+          $('li.none').before(new_todo_format);        
+        }
+        
+      });
+      $('#todolist').css("background-color","#b8d1ee");
   });
   
 }
