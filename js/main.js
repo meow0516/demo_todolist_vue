@@ -42,11 +42,17 @@ $(document).ready(function() {
     });
     
     $('.todos').on('click','.icon-floppy', function save_todo() {
+        let li_index = $(this).closest('li').index();
+        let id = content_arr[li_index]['id'];
+
         $(this).removeClass('icon-floppy save').addClass('icon-pencil');
         $(this).siblings('.content').attr('contenteditable','false');
-        let li_index = $(this).closest('li').index();
+
         edit_todo = $(this).siblings('.content').text();
-        content_arr[li_index] = edit_todo;
+
+        updateTask(id,edit_todo);
+
+        content_arr[li_index]['description'] = edit_todo;
         console.log(content_arr);
 
     });
