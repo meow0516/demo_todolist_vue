@@ -74,11 +74,13 @@ $(document).ready(function() {
             $(this).removeClass('icon-check-empty').addClass('icon-check');
             content_arr[li_index]['completed'] = true;
 
-            updateTask(id);
+            completeTask(id);
         }
         else{
             $(this).removeClass('icon-check').addClass('icon-check-empty');
             content_arr[li_index]['completed'] = false;
+
+            cancelCompleteTask(id);
         }
     });
     

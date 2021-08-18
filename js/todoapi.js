@@ -92,7 +92,7 @@ function addTask(description){
 }
 
 // update task
-function updateTask(id){
+function completeTask(id){
   var updateSettings = {
       "url": "https://api-nodejs-todolist.herokuapp.com/task/"+id,
       "method": "PUT",
@@ -104,6 +104,29 @@ function updateTask(id){
         },
         "data": JSON.stringify({
             "completed": true,
+            // "description":
+          }),
+        };
+        
+  $.ajax(updateSettings).done(function (response) {
+      console.log(response);
+    });
+
+}
+
+// cancel complete
+function cancelCompleteTask(id){
+  var updateSettings = {
+      "url": "https://api-nodejs-todolist.herokuapp.com/task/"+id,
+      "method": "PUT",
+      "timeout": 0,
+      "headers": {
+          // "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGRjY2JlYzZiNTVkYTAwMTc1OTcyMmMiLCJpYXQiOjE1NzQ3NTE2ODh9.GPbsl9FLX4VrsGVErodiXypjuz1us4tfD0jwg2_UrzY",
+          "Authorization": "Bearer "+ token,
+          "Content-Type": "application/json"
+        },
+        "data": JSON.stringify({
+            "completed": false,
             // "description":
           }),
         };
