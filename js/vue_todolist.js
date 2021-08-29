@@ -30,5 +30,22 @@ var todoList = new Vue({
 
         this.input_todo = "";
         },
+
+        completeTodo(index){
+            if(this.todos[index].complete == true){
+                this.todos[index].complete = false;
+            }
+            else{
+                this.todos[index].complete = true;
+            }
+        },
+
+        deleteTodo(index){
+            // delete task from database
+            // deleteTask(id);
+            
+            // delet on html
+            this.todos.splice(index,1);
+        },
     }
   })

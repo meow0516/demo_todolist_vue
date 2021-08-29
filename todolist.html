@@ -30,7 +30,8 @@
                             v-bind:class="{
                                 'icon-check' : todo.complete,
                                 'icon-check-empty': !todo.complete
-                            }">
+                            }"
+                            @click="completeTodo(index)">
                         </div>
                         <div class="content">
                             {{ todo.description }}
@@ -38,8 +39,9 @@
                         <div class="icon_add edit icon-pencil">
 
                         </div>
-                        <div class="icon_add icon-trash-empty delete">
-
+                        <div 
+                            class="icon_add icon-trash-empty delete"
+                            @click="deleteTodo(index)">
                         </div>
                     </div>
                     
@@ -57,10 +59,6 @@
                             class="icon_add edit" 
                             v-bind:class="{ icon-pencil:edit, icon:floppy;edit}"
                             @click="edit_todo">
-                        </div>
-                        <div 
-                            class="icon_add icon-trash-empty delete" 
-                            @click="delete_todo">
                         </div>
                     </div> -->
                 </li>
