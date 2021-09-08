@@ -27,17 +27,33 @@
                     <div class="d-flex todo_item">
                         <div 
                             class="icon_add complete"
-                            v-bind:class="{
+                            :class="{
                                 'icon-check' : todo.complete,
                                 'icon-check-empty': !todo.complete
                             }"
                             @click="completeTodo(index)">
                         </div>
-                        <div class="content">
-                            {{ todo.description }}
+                        <div class="content">                        
+                            <div  v-if="(editTodoId === index)">
+                                <input 
+                                    type="text" 
+                                    v-model="todo.description" 
+                                    @blur="blurTodo()"
+                                    ref="editItem">
+                            </div>
+                            <div v-else>
+                                {{ todo.description }}
+                            </div>
                         </div>
-                        <div class="icon_add edit icon-pencil">
-
+                        
+                        <div 
+                            class="icon_add edit"
+                            :class="{
+                                'icon-pencil' : !(editTodoId === index),
+                                'icon-floppy' : (editTodoId === index),
+                            }"
+                            @click="editTodo(todo, index)"
+                            @mousedown="addSaveStatus(index)">
                         </div>
                         <div 
                             class="icon_add icon-trash-empty delete"
@@ -45,22 +61,6 @@
                         </div>
                     </div>
                     
-                    <!-- <div class="d-flex todo_item">
-                        <div 
-                            class="icon_add complete" 
-                            v-bind:class="{ icon-check-empty: complete, icon-check:complete }"
-                            @click="complete_todo">
-                        </div>
-                        <div 
-                            class="content" 
-                            contenteditable="false">
-                        </div>
-                        <div 
-                            class="icon_add edit" 
-                            v-bind:class="{ icon-pencil:edit, icon:floppy;edit}"
-                            @click="edit_todo">
-                        </div>
-                    </div> -->
                 </li>
             </ul>
 
