@@ -168,12 +168,19 @@ var todoList = new Vue({
         },
 
         deleteTodo(index){
-            // delete task from database
             // deleteTask(id);
-            
+            let id = this.todos[index]['id'];
             // delet on html
             this.todos.splice(index,1);
+            // delete task from database
+            axios.delete('https://todo-list-api-server.herokuapp.com/api/task/'+id)
         },
+
+        mouted(){
+            this.getAllTasks();
+        }
+
+
     },
 
   })
