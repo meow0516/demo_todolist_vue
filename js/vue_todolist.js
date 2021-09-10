@@ -43,9 +43,17 @@ var todoList = new Vue({
             complete: false,
         });
         // save to databse
-        // addTask(new_todo);
+        axios.post('https://todo-list-api-server.herokuapp.com/api/task',{
+            description: this.input_todo,
+        })
+        .then(function(response){
+        console.log(response)});
+        
 
         this.input_todo = "";
+        
+        
+
         },
 
         editTodo(todo, index){
@@ -94,24 +102,8 @@ var todoList = new Vue({
 
                 
                 // save edit content by vmodel
-
-                
+              
             }
-
-           
-            // if( !('contenteditable' in this.todos[editTodoId])){
-            //     this.todos[editTodoId] = Object.assign({},this.todos[editTodoId],{contenteditable:true});
-            //     this.todos.splice(editTodoId,1,this.todos[editTodoId]);
-
-            // }
-            // else{
-            //     this.$delete(this.todos[editTodoId],'contenteditable');
-            //     // this.tods[editTodoId]['description'] = currentTodo;
-            //     console.log(this.todos[editTodoId]);
-            //     currentTodo = "";
-            //     console.log(currentTodo);
-            //     console.log(editTodoId);
-            // }
  
             
         },
