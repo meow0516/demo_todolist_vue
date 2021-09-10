@@ -28,8 +28,8 @@
                         <div 
                             class="icon_add complete"
                             :class="{
-                                'icon-check' : todo.complete,
-                                'icon-check-empty': !todo.complete
+                                'icon-check' : todo.completed,
+                                'icon-check-empty': !todo.completed
                             }"
                             @click="completeTodo(index)">
                         </div>

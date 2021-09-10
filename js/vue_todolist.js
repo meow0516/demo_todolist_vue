@@ -148,11 +148,22 @@ var todoList = new Vue({
         },
 
         completeTodo(index){
-            if(this.todos[index].complete == true){
-                this.todos[index].complete = false;
+            let id = this.todos[index]['id'];
+
+            if(this.todos[index].completed == true){
+
+                this.todos[index].completed = false;
+                axios.put('https://todo-list-api-server.herokuapp.com/api/task/'+id,
+                {completed: false,}
+                )
             }
+
             else{
-                this.todos[index].complete = true;
+                this.todos[index].completed = true;
+                axios.put('https://todo-list-api-server.herokuapp.com/api/task/'+id,
+                {completed: true,}
+                );
+            
             }
         },
 
