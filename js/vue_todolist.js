@@ -88,21 +88,17 @@ var todoList = new Vue({
                     this.$nextTick(function(){
                         currentEditItem.$refs['editItem'][0].focus();
                     })
-
-                    
-
-                }
-                
+                }                
             }
 
             else{
                 // change icon = edit
                 this.editTodoId = null;
-                // this.saveStatus = true;
-
-                
-                // save edit content by vmodel
-              
+                                
+                // save edit content to database
+                axios.put('https://todo-list-api-server.herokuapp.com/api/task/'+id,
+                {description: this.todos[index]['description'],}
+                )              
             }
  
             
