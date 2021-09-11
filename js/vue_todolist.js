@@ -7,6 +7,7 @@
 //     }
 //   })
 
+
 var todoList = new Vue({
     el: '#todolist',
     data: {
@@ -14,25 +15,19 @@ var todoList = new Vue({
         editTodoId: null,
         saveStatus: null,
         currentTodo: "",
-        todos:[
-            {
-                id: "",
-                description: "123",
-                complete: false,
-                
-            },
-            {
-                id: "",
-                description: "abc",
-                complete: true,
-                
-            },
-        ],
+        todos:[],
     },
-
+    created(){
+        this.getAllTasks();
+    },
     methods: {
         getAllTasks(){
-
+            axios.get('https://todo-list-api-server.herokuapp.com/api/task')
+            .then((response)=>{
+                response.data.forEach(todoData => {
+                    this.todos.push(todoData);
+                })
+            })
         },
  
         createTodo(){
@@ -46,17 +41,15 @@ var todoList = new Vue({
         axios.post('https://todo-list-api-server.herokuapp.com/api/task',{
             description: this.input_todo,
         })
-        .then(function(response){
-        console.log(response)});
+        // .then(function(response){
+        // console.log(response)});
         
 
-        this.input_todo = "";
-        
-        
-
+        this.input_todo = "";        
         },
 
         editTodo(todo, index){
+            let id = this.todos[index]['id'];
             // change icon
             // icon = edit now
             if( this.editTodoId !== index){
@@ -70,19 +63,14 @@ var todoList = new Vue({
                     var currentEditItem = this;
                     this.$nextTick(function(){
                         currentEditItem.$refs['editItem'][0].focus();
-                    })
-    
-                    
+                    })                   
                 }
 
                 else{
                     this.todos[this.editTodoId]['description'] = this.currentTodo;
-                    // console.log('before'+this.editTodoId+this.currentTodo);
                     
                     this.editTodoId = index;
-                    this.currentTodo = todo.description;
-                    // console.log('after'+this.editTodoId+this.currentTodo);
-                    
+                    this.currentTodo = todo.description;                    
 
                     var currentEditItem = this;
                     this.$nextTick(function(){
@@ -97,8 +85,9 @@ var todoList = new Vue({
                                 
                 // save edit content to database
                 axios.put('https://todo-list-api-server.herokuapp.com/api/task/'+id,
-                {description: this.todos[index]['description'],}
-                )              
+                {
+                    description: this.todos[index]['description'],
+                })              
             }
  
             
@@ -108,19 +97,16 @@ var todoList = new Vue({
             if( this.editTodoId !== index){
                 if( this.editTodoId === null){
                     this.saveStatus = null;
-                    console.log('change to edit mode dont add save '+this.saveStatus);
                 }
 
                 else{
                     this.saveStatus = null;
-                    console.log('channge to other item dont save '+this.saveStatus);
                 }
                 
             }
             
             else{
                 this.saveStatus = true;                
-                console.log('change status = save '+this.saveStatus);
             }
 
         },
@@ -128,19 +114,16 @@ var todoList = new Vue({
         blurTodo(){
 
             if(this.saveStatus === true){
-                console.log('save');
-                this.saveStatus = null;
-                
+                this.saveStatus = null;                
             }
+
             else{
                 this.todos[this.editTodoId]['description'] = this.currentTodo;
                 this.editTodoId = null;
                 this.currentTodo = "";
-                console.log('dont save');
                 this.saveStatus = null;
                 
-            }
-            
+            }           
         },
 
         completeTodo(index){
@@ -171,12 +154,5 @@ var todoList = new Vue({
             // delete task from database
             axios.delete('https://todo-list-api-server.herokuapp.com/api/task/'+id)
         },
-
-        mouted(){
-            this.getAllTasks();
-        }
-
-
     },
-
   })
