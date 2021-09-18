@@ -11,6 +11,7 @@
 var todoList = new Vue({
     el: '#todolist',
     data: {
+        loadingStatus: true,
         input_todo: "",
         editTodoId: null,
         saveStatus: null,
@@ -24,6 +25,7 @@ var todoList = new Vue({
         getAllTasks(){
             axios.get('https://todo-list-api-server.herokuapp.com/api/task')
             .then((response)=>{
+                this.loadingStatus = false;
                 response.data.forEach(todoData => {
                     this.todos.push(todoData);
                 })

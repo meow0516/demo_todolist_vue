@@ -21,7 +21,19 @@
             </div>
         </div>
         <hr />
-        <div class="todos">
+        <div v-show="loadingStatus">
+            <div class="loadable loading">
+                <div class="loadable-content">
+                
+                </div>
+                <div class="loadable-progress">
+                <div class="loading-spinner"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="todos none"
+            :class="{'loading-complete': !(loadingStatus)}">
             <ul>
                 <li v-for="(todo,index) in todos">
                     <div class="d-flex todo_item">
@@ -65,6 +77,8 @@
             </ul>
 
         </div>    
+
+        
     </div>
     
 </body>
