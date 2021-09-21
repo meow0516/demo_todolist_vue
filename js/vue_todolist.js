@@ -51,45 +51,47 @@ var todoList = new Vue({
         },
 
         editTodo(todo, index){
-            let id = this.todos[index]['id'];
-            // change icon
-            // icon = edit now
-            if( this.editTodoId !== index){
-                if( this.editTodoId === null){
-                    // change icon = save
+            if (this.todos[index]['completed'] === false){
+                let id = this.todos[index]['id'];
+                // change icon
+                // icon = edit now
+                if( this.editTodoId !== index){
+                    if( this.editTodoId === null){
+                        // change icon = save
+        
+                        this.editTodoId = index;    
+                        this.currentTodo = todo.description;
+        
+                        // focus on input
+                        var currentEditItem = this;
+                        this.$nextTick(function(){
+                            currentEditItem.$refs['editItem'][0].focus();
+                        })                   
+                    }
     
-                    this.editTodoId = index;    
-                    this.currentTodo = todo.description;
+                    else{
+                        this.todos[this.editTodoId]['description'] = this.currentTodo;
+                        
+                        this.editTodoId = index;
+                        this.currentTodo = todo.description;                    
     
-                    // focus on input
-                    var currentEditItem = this;
-                    this.$nextTick(function(){
-                        currentEditItem.$refs['editItem'][0].focus();
-                    })                   
+                        var currentEditItem = this;
+                        this.$nextTick(function(){
+                            currentEditItem.$refs['editItem'][0].focus();
+                        })
+                    }                
                 }
-
+    
                 else{
-                    this.todos[this.editTodoId]['description'] = this.currentTodo;
-                    
-                    this.editTodoId = index;
-                    this.currentTodo = todo.description;                    
-
-                    var currentEditItem = this;
-                    this.$nextTick(function(){
-                        currentEditItem.$refs['editItem'][0].focus();
-                    })
-                }                
-            }
-
-            else{
-                // change icon = edit
-                this.editTodoId = null;
-                                
-                // save edit content to database
-                axios.put('https://todo-list-api-server.herokuapp.com/api/task/'+id,
-                {
-                    description: this.todos[index]['description'],
-                })              
+                    // change icon = edit
+                    this.editTodoId = null;
+                                    
+                    // save edit content to database
+                    axios.put('https://todo-list-api-server.herokuapp.com/api/task/'+id,
+                    {
+                        description: this.todos[index]['description'],
+                    })              
+                }
             }
  
             
